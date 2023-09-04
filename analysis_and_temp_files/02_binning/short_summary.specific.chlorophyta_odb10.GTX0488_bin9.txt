@@ -1,0 +1,14 @@
+# BUSCO version is: 4.0.6 
+# The lineage dataset is: chlorophyta_odb10 (Creation date: 2020-08-05, number of species: 16, number of BUSCOs: 1519)
+# Summarized benchmarking in BUSCO notation for file analysis_and_temp_files/02_binning/GTX0488.fasta.metabat-bins20-20230315_164739/bin.9.fa
+# BUSCO was run in mode: genome
+
+	***** Results: *****
+
+	C:96.9%[S:96.7%,D:0.2%],F:0.6%,M:2.5%,n:1519	   
+	1472	Complete BUSCOs (C)			   
+	1469	Complete and single-copy BUSCOs (S)	   
+	3	Complete and duplicated BUSCOs (D)	   
+	9	Fragmented BUSCOs (F)			   
+	38	Missing BUSCOs (M)			   
+	1519	Total BUSCO groups searched		   

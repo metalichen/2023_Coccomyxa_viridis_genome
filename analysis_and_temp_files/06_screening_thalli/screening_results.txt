@@ -1,0 +1,31 @@
+DNA extraction	sample	band Coccomyxa ITS	sequencing results Coccomyxa ITS	pcr date Coccomyxa ITS	sequencing date Coccomyxa ITS	band rbcL	sequencing rbcL	pcr date rbcL	sequencing date rbcL
+GTX0469	GT0241	no band							
+GTX0470	GT0242	no band							
+GTX0471	grow chamber 1	band	"good quality, 99% identical to C. viridis ITS"	2023.06.16	2023.06.19				
+GTX0474	GT0241	no band							
+GTX0479	GT0241	no band							
+GTX0480	GT0245	band	"poor quality, 79% identical to C. viridis ITS"	2023.06.16	2023.06.19				
+GTX0485	GT0249	band	unusable	2023.06.16	2023.06.19				
+GTX0489	GT0250	no band							
+GTX0494	GT0252	band	"medium quality, 95% identical to C. viridis ITS"	2023.06.16	2023.06.19				
+GTX0495	GT0252	band	"medium quality, 99% identical to C. viridis ITS"	2023.06.16	2023.06.19				
+GTX0496	GT0253	double band	unusable	2023.06.16	2023.06.19				
+GTX0497	GT0253	double band	unusable	2023.06.16	2023.06.19				
+GTX0498	GT0243	band	unusable	2023.06.16	2023.06.19				
+GTX0499	GT0244	band	unusable	2023.06.16	2023.06.19				
+GTX0500	GT0244	double band	unusable	2023.06.16	2023.06.19				
+GTX0512	Xp2.1	band	unusable	2023.06.16	2023.06.19				
+GTX0513	Xp2.2	band	unusable	2023.06.16	2023.06.19				
+GTX0514	Xp2.3	band	"medium quality, 92% identical to C. viridis ITS"	2023.06.16	2023.06.19				
+GTX0515	Xp3.1	band at the right length	"low quality, after editing 72% identical to Coccomyxa viridis"	2023.06.23	2023.06.28	band	"mid quality, 93% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0516	Xp4.1	band at the right length	unusable	2023.06.23	2023.06.28	band	unusable	2023.06.27	2023.06.28
+GTX0517	Xp5.1	band at the right length	unusable	2023.06.23	2023.06.28	band	unusable	2023.06.27	2023.06.28
+GTX0518	Xp6.1	no band		2023.06.23	2023.06.28	no band	unusable	2023.06.27	2023.06.28
+GTX0519	Xp3.3	band at the right length	unusable	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0520	Xp4.3	band at the right length	"low quality, after editing 79% identical to Coccomyxa viridis"	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0521	Xp5.3	band at the right length	"low quality, after editing 85% identical to Coccomyxa viridis"	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0522	Xp6.3	faint	"low quality, after editing 85% identical to Coccomyxa sp. KN-2011-C10"	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0523	Xp7	band at the right length	"low quality, after editing 72% identical to Coccomyxa sp. KN-2011-C10"	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0524	Xp8	band at the right length	"low quality, after editing 82% identical to Coccomyxa antarctica"	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0525	Xp9	band at the right length	unusable	2023.06.23	2023.06.28	band	"good quality, 99% identical to Trebouxia"	2023.06.27	2023.06.28
+GTX0526	Xp10	band at the right length	"low quality, after editing 79% identical to Coccomyxa antarctica"	2023.06.23	2023.06.28	band	"mid quality, 93% identical to Trebouxia"	2023.06.27	2023.06.28

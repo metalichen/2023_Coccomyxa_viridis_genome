@@ -1,0 +1,328 @@
+---
+title: "06_screening_thalli"
+author: "Gulnara Tagridzhanova"
+date: "01/06/2023"
+output: 
+  html_document:
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/path/to/repo/notebook")
+
+```
+
+## 1. Designing primers
+* Tried designing primers specific for Coccomyxa, so they would exclude Trebouxia
+* The alignment used for the primer design is in `analysis_and_temp_files/06_screening_thalli/rdna_alignment_for_primers.fasta`
+* Potential pairs:
+  * ITS1 (standard) and cvirITSR1 (HG972999.1 positions 2399-2419). cvirITSR1 appears specific to the C. viridis clade, has 4 mismatches with C. subellipsodea and 12 with Trebouxia. Length: 645 bp. Form a primer dimer 
+```
+>its1
+TCCGTAGGTGAACCTGCGG
+>cvirITSR1
+GGCTCACCTACCGGTCTGTTG
+```
+  * ITS1 (standard) and cvirITSR2 (HG972999.1 positions 2358-2376). cvirITSR2 appears specific to the C. viridis clade, has 3 mismatches with C. subellipsodea and 13 with Trebouxia. Length: 601 bp. Don't form a primer dimer  
+```
+>its1
+TCCGTAGGTGAACCTGCGG
+>cvirITSR2
+GCTCAAGCCTCTGCGCTTC
+```  
+  * cvirITSF1 (HG972999.1 positions 303-326) and ITS4T (standard). cvirITSF1 appears specific to the Elliptochloris clade,matches C. subellipsodea and Elliptochloris. Has 9 mismatches with Trebouxia. Length: 2223 bp. Don't form a primer dimer  
+```
+>cvirITSF1
+ACGGTAAGGTATTGGCTTACCGTG
+>its4t
+GGTTCGCTCGCCGCTACTA
+```
+
+### Testing primers
+* 7.06.2023 
+* Tested all algal primers, including generic algal 
+* Tested on:
+  * the DNA extraction from Coccomyxa viridis culture (GTX0488). Should work for all primers
+  * DNA from lichen thallus (GTX0468). Should work only with general primers
+* Included 6 primer pairs
+```{r,message=F}
+table<-data.frame(
+  "forward primer"=c("ITS1","a-ch-rbcL-203-5’-MPN","ITS1","ITS1","cvirITSF1","ITS1T"),
+  "reverse primer"=c("ITS4T","a-ch-rbcL-991-3’-MPN","cvirITSR1","cvirITSR2","ITS4T","ITS4T"),
+  "locus"=c("ITS","rbcL","ITS","ITS","ITS","ITS"),
+  "target"=c("chlorophyta","chlorophyta","Coccomyxa","Coccomyxa","Coccomyxa","chlorophyta")
+)
+table
+```
+* For these PCRs, took a sample of DNA extractions (3 uL) and diluted with 9 uL of water
+* PCR program followed Nelsen et al. (see `analysis_and_temp_files/01_DNA_extraction/2023.06.07_One_Taq_multi.xlsx`)
+  * in all but one primer pairs, used 50C annealing temperature, in ITS1T/ITS4T used 56C 
+
+### Results
+* Only one primer pair worked in Coccomyxa: ITS1/cvirITSR1
+* Of generic primers:
+  * rbcL primers worked for both. Sequencing produced expected results: 99% identical to Trebouxia (GTX0468) and Coccomyxa (GTX0488)
+  * ITS1T/ITS4T worked in Coccomyxa but failed in a thallus, which is weird
+  * ITS1/ITS4T produced multiple bands in both, probably need higher temperature for specificity
+* Sequencing of the ITS1/cvirITSR1 band (12-14.06.2023) worked as expected (97% identical to Coccomyxa viridis)
+
+## 2. Screening unwashed thalli
+* **Rationale:** want to check if Coccomyxa viridis can be amplified from untreated Xanthoria
+* Saved table with results as `analysis_and_temp_files/06_screening_thalli/screening_results.txt`
+
+### First run: didn't get Coccomyxa bands
+* 13.06.2023
+* PCR'd 5 existing DNA extractions from untreated Xanthoria parietina
+```{r,message=F}
+library(tidyverse)
+read.delim("../../00_lichen_project_meta/metatables/dna_extractions.txt") %>%
+  filter(Extraction.. %in% c("GTX0475","GTX0475",
+"GTX0476",
+"GTX0477",
+"GTX0478",
+"GTX0492")) %>% select(Extraction..,Specimen..,Extraction.Date)
+```
+* Used two pairs of primers: general rbcL and Coccomyxa-specific ITS1/cvirR1
+* In the same run, I also PCR'd second attempt at thallus wash (see above) and re-did PCR from algal cultures (see `../../08_isolation_trebouxia/analysis_and_temp_files/01_id_existing`, `../../08_isolation_trebouxia/analysis_and_temp_files/02_thalli_isolation`; this was in case sequencing failed)
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.13_screen_thalli1.xlsx`  
+
+#### Results
+* Got rbcL bands in almost all
+* Didn't get any Coccomyxa ITS bands
+* Two extractions GTX0477 and GTX0478 (from growth chambers L17 and L22) didn't produce bands. Likely, the extraction has degraded
+
+### Screening existing extractions
+#### With standard Taq: only one band
+* 2023.06.14
+* Run PCR with the same two pairs of primers: general rbcL and Coccomyxa-specific ITS1/cvirR1
+* Used all existing Xanthoria extraction, except from L17 and L22, and except those that had very little left
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.14_screen_thalli2.xlsx`  
+* Got rbcL bands in only half (weird). 
+* Got bands in ITS1/cvirR1 (GTX0500). Cut them out from a gel:
+  * ITS_upper: two bands very close to each other, at the level of ITS bands from the positive control (about 600 bp). Since the bands were so close, couldn't separate them and processed together
+  * ITS_lower: another band, about 300 bp
+* Prepped for sequencing 3 bands from GTX0500: rbcL, ITS_upper, ITS_lower. rbcL came back as Trebouxia (99% identical), both bands from ITS1/cvirR1 failed
+  
+#### With Q5 polymerase. first attempt
+* 2023.06.15
+* Repeated the PCR run for Coccomyxa-specific ITS1/cvirR1, using Q5 polymerase
+* Shortened the program (30 sec in each stage of the cycle instead of 1 min), but kept 50 cycles
+* Got multiple bands in almost every extraction. Several extractions had a band at the right length
+* Might cut out and try to sequence them later, if the sequencing of two gel-cutout bands from 2023.06.14
+
+#### With Q5 polymerase. first attempt at temperature optimizing
+* 2023.06.16
+* Picked one extraction with a band at the right length: GTX0495. Used GTX0488 as a positive control
+* Did a temperature gradient from 50C to 57C
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.16_temperature_optimizing.xlsx`
+* **Results:** in all temperatures, got a clear band at the right length, plus a faint second band
+* Prepped one of the reactions for sequencing (without cutting from the gel) on 2023.06.19
+
+#### With Q5 polymerase. second attempt
+* 2023.06.16
+* Did screening again, see `analysis_and_temp_files/06_screening_thalli/2023.06.16_screen_thalli4.xlsx`
+* Used a shortened program and 57C Tanneal
+* Used two primer pairs: ITS1/cvirR1 and ITS1T/cvirR1
+* **Results:** ITS1/cvirR1 in multpiple extractions yielded a band at a correct length. Mostly reactions had other bands too
+* ITS1T/cvirR1 worked poorly in comparison: multiple bands, mostly at the wrong lengths
+* Got right-length bands in the washing experiment (Xp2), in all three extractions: wash water Xp2.1 and Xp2.2 and washed thallus Xp2.3
+* Cut the bands from the gel and prepped for sequencing on 2023.06.19
+* Of 15 untreated thalli, got 10 bands. Of 10 bands, got 5 sequences (1 good quality, 4 medium and poor quality) 
+
+#### With Q5 polymerase. second attempt at temperature optimizing
+* 2023.06.21
+* Tried again temperature gradient, increasing from 57C to 62C
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.21_temperature_optimizing.xlsx`
+* Used GTX0488 and GTX0499 (produced multiple bans during the previous run)
+* Also included rbcL primers, to see how they fare with Q5
+* Changed Tdenatur from 95 to 98 (this was the temperature that Weibin suggested for Q5)
+* **Results:** no visible difference in ITs1/cvirR1. in rbcL, the optimal temperature seems to be 60C
+
+#### With Q5 polymerase. thirs attempt at temperature optimizing
+* 2023.06.22
+* Increased the temperature further, to the gradient from 62C to 70C
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.22_temperature_optimizing.xlsx`
+* Used GTX0488 and GTX0499 (produced multiple bans during the previous run)
+* Changed Tdenatur from 95 to 98 (this was the temperature that Weibin suggested for Q5)
+* **Results:** highest temperature (70.2C) performed best, with the right-length band being clearly dominant. Although even this temperature still produced some extra bands
+
+
+## 3. Washing thalli
+### First attempt: Instagene extraction
+* 9-12.06.2023
+* Used Xanthoria parietina thallus from tree bark collected by Flurin near TSL
+* With forceps and a razor blade isolated pieces of thallus. Took care to remove bark pieces from the lower surface (although some got stuck to the rhizines)
+* Put the thallus fragments in sterile water for 30 sec. This wash removed some residial bark pieces. Saved the water as "Xp1" 
+* Put the thallus fragments in clean water, and soaked for 10 min
+* With a paintbrush, brushed the upper surface of each fragment
+* Removed the thallus fragments, saved the water as "Xp2". Saved the thallus as "Xp3"
+* Centrifuged Xp1 and Xp2 (each 35 ml) at 4,000 rmp 5 min
+* Removed supernatant
+* Transferred the pellet into 1.5 ml tubes, centrifuged 10,000 rmp 1 min
+* Saved the pellets for microscopy and PCR
+
+#### Microscopy results
+* Both washes looked similar. They contained fungal spores, small thallus fragments, bark fragments, and unidentifiable junk
+* Algal cells included Trebouxia, some cells similar to autospores, and cells with Coccomyxa-like morphology
+
+* Thallus fragment, Trebouxia, and autospores (?)
+<p float="left">
+  <img src="../data/photos/wash1_thallus_lowres.jpg" width="250" />
+  <img src="../data/photos/wash1_treb_lowres.jpg" width="250" /> 
+  <img src="../data/photos/wash1_autospore_lowres.jpg" width="250" />
+</p>
+
+* Coccomyxa-like alga from the wash (left) compared to Coccomyxa viridis from the lab liquid culture (right)
+<p float="left">
+  <img src="../data/photos/wash1_cocc_lowres.jpg" width="375" /> 
+  <img src="../data/photos/cviridis_liq_2_lowres.jpg" width="375" />
+</p>
+
+#### DNA extraction and PCR
+* Extracted both Xp1 and Xp2 using InstaGene matrix
+* In this run, I also extracted and PCR'd existing and new algal cultures (`../../08_isolation_trebouxia/analysis_and_temp_files/01_id_existing`, `../../08_isolation_trebouxia/analysis_and_temp_files/02_thalli_isolation`) 
+* For each, used 100 uL of the matrix. Followed the bacterial protocol, except for the first (resuspension-centrifugation) step
+* Resulting extraction was slightly brown
+* Ran PCR with two pairs of primers: general rbcL and Coccomyxa-specific ITS1/cvirR1
+* Used 2 uL of the extraction for each reaction. Ran 50 cycles.
+* As positive controls, used: 
+  * GTX0488: Coccomyxa viridis kit extraction, for which these primers already worked - to control for basic PCR problems
+  * GTX0504: Coccomyxa viridis InstaGene extraction, for which I haven't tested ITS1/cvirR1 primers - to control for problems in primer design or DNA extraction method
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.12_One_Taq_id_cultures1.xlsx`
+
+#### PCR Results
+* While positive control worked, all reactions with Xp1 and Xp2 failed
+* Since even rbcL primers failed, it's likely not because of the absence of the template, but because of the DNA quality
+* Sequenced the ITS1/cvirR1 bands from both positive controls (12-14.06.2023), worked as expected (97% identical to Coccomyxa viridis ITS)
+* Will re-do the extraction
+
+### Second attempt: DNEasy extraction worked for PCR
+* 13.06.2023
+* Used Xanthoria parietina thallus from tree bark collected by Flurin near TSL
+* **Moisturized the thallus.** With forceps isolated pieces of thallus. Took care to remove all visible bark pieces from the lower surface
+* Put the thallus fragments in sterile water for 30 sec. This wash removed some residual bark pieces. Saved the water as "Xp2.1" 
+* Put the thallus fragments in clean water, and soaked for 10 min. Vortexed at 600 rpm for 5 min
+* With a paintbrush, brushed the upper surface of each fragment
+* Removed the thallus fragments, saved the water as "Xp2.2". Saved the thallus as "Xp2.3"
+* Centrifuged Xp1 and Xp2 (each 35 ml) at 4,000 rmp 5 min
+* Removed supernatant
+* Transferred the pellet into 1.5 ml tubes, centrifuged 10,000 rmp 5 min
+* Dried both pellets and a fragment of Xp2,3 (aka washed thallus) for 2 hours at 65C
+* Extracted with a standard DNEasy protocol (DNA extractions GTX0512-513). All three extractions were moderately successful according to Nanodrop (the lowest concentration os 10.9 ng/uL was in Xp2.2)
+
+#### PCR
+* Run PCR following the same program, with the same two pairs of primers: general rbcL and Coccomyxa-specific ITS1/cvirR1
+* In the same run, PCR'd some old Xanthoria extractions (see below) re-did PCR from algal cultures (see `../../08_isolation_trebouxia/analysis_and_temp_files/01_id_existing`, `../../08_isolation_trebouxia/analysis_and_temp_files/02_thalli_isolation`; this was in case sequencing failed)
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.13_screen_thalli1.xlsx`
+* Re-run ITS1/cvirR1 with Q5 polymerase, shortened program, and higher Tanneal (57C) see `analysis_and_temp_files/06_screening_thalli/2023.06.16_screen_thalli4.xlsx`
+
+#### Results
+* Got rbcL bands in all three (wash water and washed thallus), indicating that the extractions are of good enough quality
+* With Taq, didn't get any Coccomyxa ITS bands
+* With Q5, got bands in all three
+  * bands in wash water yielded unusable sequences
+  * band in the washed thallus yielded a medium quality sequence, 92% identical to C. viridis ITS
+  
+### Third attempt
+* 21.06.2023
+* Washed 4 thalli, form the same location: Xp3-Xp6
+* Washed as before, except:
+  * Didn't split wash water into two fractions (saved as Xp3.1-Xp6.1)
+  * Did a final wash of the thallus before using it for DNA extraction. Washed in the sink under the flowing water for ~15 sec
+* Extracted all successfully (Xp4.1 is a bit low), saved as GTX0515-522
+
+
+### Aggressive washing
+* 23.06.2023
+* To check if Coccomyxa can actually be inside a lichen, did a more aggresive wash
+* Followed [U'ren et al.2014](https://onlinelibrary.wiley.com/doi/full/10.1111/1755-0998.12252):
+  * washed each thallus in a jet of de-ioinized water
+  * soaked and agitated in 95% EtOH (10 sec)
+  * 0.525% NaOCl (2 min)
+  * soaked in 70% EtOH (2 min, vortexed at 600 rpm) 
+  * washed again in a jet of de-ioinized water
+* Extracted with DNEasy, saved extractions as GTX0523-526
+
+### PCR of new washing extractions: Coccomyxa primers
+* 23.06.2023
+* PCR'd all extractions from third washing (Xp3-Xp6; GTX0515-522) and aggressive washing (Xp7-Xp10; GTX0523-526)
+* Used Coccomyxa ITS primers and general rbcL primers
+* See `analysis_and_temp_files/06_screening_thalli/2023.06.23_screen_thalli5.xlsx`
+* **Results:** 
+  * ITS Coccomyxa produced bands in almost all. Will purify from gel and sequence
+  * rbcL weirdly fail in alomst a half. Will re-do
+* Prepped for ITS for sequencing 27-28.06.2023
+
+### PCR of new washing extractions: repeating rbcL
+* 26.06.2023
+* Repeated the PCR for rbcL from 23.06.2023, but with few modifications:
+  * Lowered Tanneal from 60C to 57C
+  * Lowered the number of cycels from 50 to 35
+  * Increased each step in the cycle from 30 sec to 1 min
+* **Results:** worked in all, except one (GTX0518 = Xp6.1)
+* Prepped for sequencing 27-28.06.2023
+
+## 4. Results
+* Got sequencing of 4 washed thalli + 4 wash water samples + 4 aggresively washed thalli
+* All Coccomyxa sequences have poor quality, had to edit them manually
+* Saved sequences as `analysis_and_temp_files/06_screening_thalli/cvir_sequences.fa`
+
+## 5. Placing sequences in the phylogeny
+* Combined genbank sequences and the PCR-derived sequences, aligned and treed
+```
+source package /tgac/software/testing/bin/mafft-7.271
+source package /tsl/software/testing/bin/trimal-latest     
+source package /tgac/software/testing/bin/gcc-4.9.1 
+
+cat analysis_and_temp_files/03_id_alga/genbank_its.fasta analysis_and_temp_files/06_screening_thalli/cvir_sequences.fa > analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli.fa
+mafft --maxiterate 1000 --genafpair analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli.fa > analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli_aligned.fa
+trimal -in analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli_aligned.fa -out analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli_aligned.phyl -gt 0.1 -phylip -keepheader
+
+bash code/iqtree.sh analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli_aligned.phyl 20
+```
+* Visualized
+
+```{r, message = FALSE,fig.width=20,fig.height=10}
+library(ape)
+library(ggtree)
+tree4<-read.tree("../analysis_and_temp_files/06_screening_thalli/combined_its_add_thalli_aligned.phyl.contree")
+tree4 <- root(tree4, outgroup = "LC660445.1", resolve.root = TRUE)
+tree4 <- as.polytomy(tree4, feature='node.label', fun=function(x) as.numeric(x) < 70)
+
+##rename
+lit<-read.delim2("../analysis_and_temp_files/03_id_alga/its_id.txt",header=F)
+colnames(lit)<-c("sequence","name","Coccomyxa_role","Lichen.metagenomes","Photobiont","note","link")
+lit<-lit %>% mutate(new=ifelse(Coccomyxa_role %in% c("non-photobiont-lichen","photobiont"),
+                          paste(sequence,name,"from",Lichen.metagenomes),
+                          paste(sequence,name))) %>% select(sequence,new)
+pcr<-data.frame("sequence"=c("Xp3.1_GTX0515_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited",
+                             "Xp4.3_GTX0520_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited",
+                             "Xp5.3_GTX0521_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited",
+                             "Xp6.3_GTX0522_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited",
+                             "Xp7_GTX0523_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited",
+                             "Xp8_GTX0524_ITScvirR1_2023.06.23_screen_thalli5-Premixed2",
+                             "Xp10_GTX0526_ITScvirR1_2023.06.23_screen_thalli5-Premixed_edited"),
+                "new"=c("sample1_wash_water",
+                       "sample2_washed_thallus",
+                       "sample3_washed_thallus",
+                       "sample4_washed_thallus",
+                       "sample5_washed_thallus",
+                       "sample6_washed_thallus",
+                       "sample8_washed_thallus"))
+names<-rbind(lit,pcr)
+
+tree4$tip.label<-names[[2]][match(tree4$tip.label, names[[1]])]
+
+#make a vector for color
+df<-data.frame("new"=tree4$tip.label) %>% left_join(names) %>% 
+  mutate(labels=ifelse(grepl("_wash",new),"PCR-derived sequences","other"))
+
+
+p <- ggtree(tree4,ladderize = TRUE,right = T,linewidth=0.2) %<+% df + 
+  geom_tiplab(pch=16, aes(col=labels),size=3)+
+  scale_color_manual(values=c("PCR-derived sequences" = "blue","strain from this paper"= "red", "other"="black"))+theme(legend.text=element_text(size=4),legend.title=element_blank())
+p + xlim(0, 0.5)
+ggsave("../results/ITS_tree_PCR.svg",device="svg",width=9,height=9)
+```
+

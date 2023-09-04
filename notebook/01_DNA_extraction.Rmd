@@ -1,0 +1,62 @@
+---
+title: "01_DNA_extraction.md"
+author: "Gulnara Tagridzhanova"
+date: "16/11/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/path/to/repo/notebook")
+```
+
+
+DNA extraction from the culture
+
+### 1. DNA extraction
+* NucleoBond HMW DNA Kit (MACHEREY-NAGEL)
+* Borrowed from 2Blades
+* See kit manual [here](https://www.mn-net.com/media/pdf/1b/f4/18/Instruction-NucleoBond-DNA-HMW.pdf)
+* 24.11-6.12.2022, with help from Xia
+
+#### Harvested algal material
+* Used two flasks, both labeled as "Trebouxia Lab stock Xia Yan", two dates: 5.05.2021 and 21.06.2021
+* Divided between 6 falcon tubes
+* Centrifuged for 5 min at 4,000 rpm
+* Removed supernatant
+* Pipetted into 2 x 2ml tubes
+* Frozen in liquid nitrogen
+* Put for freeze-drying (-57C) for 6 days
+
+#### Extraction protocol
+* on 6.12.2022
+* Sampled material: 34 mg (dry weight)
+* Snap-freezed in liquid nitrogen
+* Used geno/grinder at 1,300 rpm for 1 min
+* Extracted using the Nuclobond HMW kit
+* followed the protocol for bead beating, with one modification: after adding 900 uL of H1 and 200 uL of proteinase K, incubated for 5 min, inverting the tubes
+
+#### Results
+* DNA extraction: GTX0488 110 ng/uL according to qubit (579 ng/uL Nanodrop), 260/280 = 1.86, 260/230 = 1.99. Gel shows a single band, >15,000 bp, with minimal smear
+
+### 2. Sequencing and assembly
+#### Illumina sequencing by Novogene
+* The extraction was diluted 3 times (10 uL of extraction + 20 uL of HE buffer)
+* Illumina Sequencing PE150
+* Sequenced to 2 Gbp
+
+#### Nanopore sequencing and assembly by Future Genomics 
+* Sequenced on PromethION Flow Cell FLO-PRO114M
+* Device: P2_SOLO (P2S_00211-2) and PromethION 24 (PC24B246)
+* Flowcell ID: PAM44010, PAM44203, PAM44220
+* Library kit type: Native Barcoding Kit V14 (SQK-NBD114-96)
+* Duplex basecalling:
+  * Fast5 to Pod5: pod5_convert_from_fast5.py
+  * Basecalling: Dorado v0.2.1
+  * Filter pairs: Duplex tools v0.3.1
+  * Basecall pairs: Dorado v0.2.1
+  * Convert to Fastq: samtools v1.16.1
+* Sequenced to 25 Gbp
+* Contigs were de novo assembled and corrected using Flye vs. 2.9-b1780. 'overlap 10K, error rate 0.005, no-alt-contigs' produced the best specs
+* The assembly was polished based on ONT reads using Medaka vs. 1.7.2, and polished twice based on Illumina reads using Pilon vs. 1.23
+

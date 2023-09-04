@@ -1,0 +1,63 @@
+Run	Lichen.metagenomes	Coccomyxa_role	Photobiont
+ERR4179389	Cladonia furcata	epiphyte	Trebouxia
+ERR4179390	Lobaria pulmonaria	epiphyte	Symbiochloris 
+ERR4179391	Peltigera polydactylon	epiphyte	Nostoc
+GTX0158	Gomphillus americanus	epiphyte	Chloroidium 
+GTX0161	Alectoria fallacina	epiphyte	Trebouxia
+SRR11456915	Peltigera aphthosa	photobiont	Coccomyxa
+SRR11456917	Peltigera phyllidiosa	photobiont	Coccomyxa
+SRR11456919	Solorina crocea	photobiont	Coccomyxa
+SRR11456921	Peltigera evansiana	photobiont	Coccomyxa
+SRR13685149	Mycocalicium subtile	epiphyte	None
+SRR13685159	Icmadophila ericetorum	photobiont	Coccomyxa
+SRR13685162	Usnea subfusca	epiphyte	Trebouxia
+SRR13685165	Usnea cornuta	epiphyte	Trebouxia
+SRR14721947	Usnea mutabilis	epiphyte	Trebouxia
+SRR14721952	Cladonia ochrochlora	epiphyte	Trebouxia
+SRR14721962	Ramalina petrina	epiphyte	Trebouxia
+SRR14721970	Leucodecton sp. Tripp_6156_NY-2796959	epiphyte	Trentepohlia 
+SRR14721971	Porina heterospora	epiphyte	Trentepohlia 
+SRR14721974	Hypotrachyna catawbiensis	epiphyte	Trebouxia
+SRR14722039	Trapeliopsis flexuosa	epiphyte	Chloroidium 
+SRR14722041	Stereocaulon dactylophyllum	epiphyte	Asterochloris 
+SRR14722042	Scoliciosporum umbrinum	epiphyte	Apatococcus 
+SRR14722045	Rinodina ascociscana	epiphyte	Trebouxia 
+SRR14722066	Pilophorus fibula	epiphyte	Asterochloris 
+SRR14722067	Pertusaria epixantha	epiphyte	Trebouxia 
+SRR14722071	Arthonia cupressina	unknown	unknown
+SRR14722085	Pseudosagedia rhaphidosperma	epiphyte	Trentepohlia 
+SRR14722109	Pertusaria andersoniae	epiphyte	Trebouxia 
+SRR14722112	Sticta sp. Lendemer_47364_NY-2795562	unknown	unknown
+SRR14722125	Ionaspis alba	unknown	unknown
+SRR14722129	Pseudevernia cladonia	epiphyte	Trebouxia 
+SRR14722130	Parmotrema hypotropum	epiphyte	Trebouxia 
+SRR14722135	Mycocalicium subtile	epiphyte	None
+SRR14722143	Zwackhia viridis	epiphyte	Trentepohlia 
+SRR14722152	Micarea neostipitata	photobiont	Coccomyxa
+SRR14722154	Lecanora strobilina	epiphyte	Trebouxia 
+SRR14722158	Lecanora albella	epiphyte	Trebouxia 
+SRR14722159	Ochrolechia arborea	unknown	unknown
+SRR14722160	Herteliana schuyleriana	unknown	unknown
+SRR14722172	Chrysothrix xanthina	epiphyte	Trebouxia 
+SRR14722184	Lecanora hybocarpa	epiphyte	Trebouxia 
+SRR14722188	Xylographa vitiligo	epiphyte	Trebouxia 
+SRR14722221	Megalospora porphyritis	epiphyte	Symbiochloris 
+SRR14722229	Lecidea roseotincta	epiphyte	unknown
+SRR14722231	Lecanora masana	epiphyte	Trebouxia 
+SRR14722232	Lecanora rugosella	epiphyte	Trebouxia 
+SRR14722272	Lepraria leprolomopsis	epiphyte	Asterochloris 
+SRR14722281	Viridothelium virens	epiphyte	Trentepohlia 
+SRR14722291	Tuckermannopsis ciliaris	epiphyte	Trebouxia 
+SRR14722299	Cladonia squamosa	epiphyte	Trebouxia 
+SRR14722316	Heterodermia echinata	epiphyte	Trebouxia 
+SRR14722330	Pertusaria obruta	epiphyte	Trebouxia 
+SRR1531517	Dibaeis baeomyces	photobiont	Coccomyxa 
+SRR5808932	Pseudevernia furfuracea	epiphyte	Trebouxia 
+T1867	Xylographa_vitiligo	epiphyte	Trebouxia 
+T1868	Ptychographa_xylographoides	epiphyte	Trebouxia 
+T1888	Puttea_exsequens	epiphyte	Trebouxia 
+T1889	Xylographa_carneopallida	epiphyte	Trebouxia 
+T1894	Bachmanniomyces_S44760	epiphyte	Symbiochloris 
+T1904	Toensbergia_leucococca	epiphyte	Trebouxia 
+T1916	Thelotrema_lepadinum	epiphyte	Trentepohlia 
+X4	Pectenia plumbea	epiphyte	Nostoc

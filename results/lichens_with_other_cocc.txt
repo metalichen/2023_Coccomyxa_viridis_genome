@@ -1,0 +1,34 @@
+Sequence_ID	Name	Sequence_source	Lichen_species	Source_metagenome	Role	Primary_photobiont_of_the_lichen	clade
+AY328523.1	AY328523.1 Coccomyxa subellipsoidea strain SAG 216 13 from Lichenomphalia umbellifera	Literature	Lichenomphalia umbellifera	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293947.1	AY293947.1 Coccomyxa sp C16 from Lichenomphalia hudsoniana	Literature	Lichenomphalia hudsoniana	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+SRR11456921_NODE_117642_length_878_cov_2.376671	SRR11456921_NODE_117642_length_878_cov_2.376671 Coccomyxa from Peltigera evansiana metagenome from Peltigera evansiana	Lichen metagenome	Peltigera evansiana	SRR11456921	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293945.1	AY293945.1 Coccomyxa sp C19 from Lichenomphalia umbellifera	Literature	Lichenomphalia umbellifera	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293933.1	AY293933.1 Coccomyxa sp C18 from Lichenomphalia hudsoniana	Literature	Lichenomphalia hudsoniana	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+SRR13685159_NODE_1352_length_12292_cov_16.590177	SRR13685159_NODE_1352_length_12292_cov_16.590177 Coccomyxa from Icmadophila ericetorum metagenome from Icmadophila ericetorum	Lichen metagenome	Icmadophila ericetorum	SRR13685159	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293932.1	AY293932.1 Coccomyxa sp C12 from Lichenomphalia umbellifera	Literature	Lichenomphalia umbellifera	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+SRR11456917_NODE_168307_length_406_cov_1.168091	SRR11456917_NODE_168307_length_406_cov_1.168091 Coccomyxa from Peltigera phyllidiosa metagenome from Peltigera phyllidiosa	Lichen metagenome	Peltigera phyllidiosa	SRR11456917	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293948.1	AY293948.1 Coccomyxa sp C14 from Lichenomphalia hudsoniana	Literature	Lichenomphalia hudsoniana	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+AY293946.1	AY293946.1 Coccomyxa sp C20 from Lichenomphalia grisella	Literature	Lichenomphalia grisella	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+KX185526.1	KX185526.1 Coccomyxa sp GM15A_305 from Lichenomphalia oreades	Literature	Lichenomphalia oreades	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+KX185525.1	KX185525.1 Coccomyxa sp 15_10_25 from Lichenomphalia oreades	Literature	Lichenomphalia oreades	NA	photobiont	Coccomyxa	C. subellipsoidea clade
+SRR11456919_NODE_7569_length_4933_cov_238.826773	SRR11456919_NODE_7569_length_4933_cov_238.826773 Coccomyxa from Solorina crocea metagenome from Solorina crocea	Lichen metagenome	Solorina crocea	SRR11456919	photobiont	Coccomyxa	C. subellipsoidea clade
+KY402198.1	KY402198.1 Coccomyxa sp YN	Literature	Cladonia yunnan	NA	non-photobiont-lichen	Trebouxia	C. subellipsoidea clade
+MH753231.1	MH753231.1 Coccomyxa solorinae isolate P245 from Peltigera leucophlebia	Literature	Peltigera leucophlebia	NA	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+KJ690280.1	KJ690280.1 Coccomyxa peltigerae isolate 10459_A  from Peltigera aphthosa	Literature	Peltigera aphthosa	NA	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+HE586545.1	HE586545.1 Coccomyxa sp. KN-2011-E5 from Peltigera leukophlebia	Literature	Peltigera leukophlebia	NA	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+KJ690288.1	KJ690288.1 Coccomyxa sp from Peltigera aphthosa	Literature	Peltigera aphthosa	NA	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+HE586513.1	HE586513.1 Coccomyxa sp. KN-2011-E4 from Peltigera aphthosa	Literature	Peltigera aphthosa	NA	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+SRR11456915_NODE_12147_length_3532_cov_43.206500	SRR11456915_NODE_12147_length_3532_cov_43.206500 Coccomyxa from Peltigera aphthosa metagenome from Peltigera aphthosa	Lichen metagenome	Peltigera aphthosa	SRR11456915	photobiont	Coccomyxa	C. simplex/C. solorinae clade
+MZ868162.1	MZ868162.1 Coccomyxa simplex isolate HP_50BP	Literature	Lobaria retigera	NA	non-photobiont-lichen	Nostoc	C. simplex/C. solorinae clade
+SRR14722299_NODE_142154_length_315_cov_3.496154	SRR14722299_NODE_142154_length_315_cov_3.496154 Coccomyxa from Cladonia squamosa metagenome from Cladonia squamosa	Lichen metagenome	Cladonia squamosa	SRR14722299	epiphyte	Trebouxia 	C. simplex/C. solorinae clade
+SRR14722188_NODE_196213_length_721_cov_18.551051	SRR14722188_NODE_196213_length_721_cov_18.551051 Coccomyxa from Xylographa vitiligo metagenome from Xylographa vitiligo	Lichen metagenome	Xylographa vitiligo	SRR14722188	epiphyte	Trebouxia 	Other
+SRR14721952_NODE_421717_length_245_cov_1.010526	SRR14721952_NODE_421717_length_245_cov_1.010526 Coccomyxa from Cladonia ochrochlora metagenome from Cladonia ochrochlora	Lichen metagenome	Cladonia ochrochlora	SRR14721952	epiphyte	Trebouxia	Other
+SRR14722112_NODE_117467_length_388_cov_1.171171	SRR14722112_NODE_117467_length_388_cov_1.171171 Coccomyxa from Sticta sp. Lendemer_47364_NY-2795562 metagenome	Lichen metagenome	Sticta sp. Lendemer_47364_NY-2795562	SRR14722112	unknown	unknown	Other
+SRR14721962_NODE_5410_length_2216_cov_14.211476	SRR14721962_NODE_5410_length_2216_cov_14.211476 Coccomyxa from Ramalina petrina metagenome from Ramalina petrina	Lichen metagenome	Ramalina petrina	SRR14721962	epiphyte	Trebouxia	Other
+SRR14722045_NODE_117206_length_344_cov_2.325260	SRR14722045_NODE_117206_length_344_cov_2.325260 Coccomyxa from Rinodina ascociscana metagenome from Rinodina ascociscana	Lichen metagenome	Rinodina ascociscana	SRR14722045	epiphyte	Trebouxia 	Other
+SRR14722158_NODE_25533_length_1459_cov_15.180199	SRR14722158_NODE_25533_length_1459_cov_15.180199 Coccomyxa from Lecanora albella metagenome from Lecanora albella	Lichen metagenome	Lecanora albella	SRR14722158	epiphyte	Trebouxia 	Other
+T1867_NODE_26994_length_944_cov_10.049494	T1867_NODE_26994_length_944_cov_10.049494 Coccomyxa from Xylographa_vitiligo metagenome from Xylographa_vitiligo	Lichen metagenome	Xylographa_vitiligo	T1867	epiphyte	Trebouxia 	Other
+SRR14722039_NODE_69486_length_758_cov_3.176387	SRR14722039_NODE_69486_length_758_cov_3.176387 Coccomyxa from Trapeliopsis flexuosa metagenome from Trapeliopsis flexuosa	Lichen metagenome	Trapeliopsis flexuosa	SRR14722039	epiphyte	Chloroidium 	Other
+HG972998.1	HG972998.1 Coccomyxa dispar strain SAG 49.84 from Multiclavula vernalis	Literature	Multiclavula vernalis	NA	photobiont	Coccomyxa	Other
+JN573865.1	JN573865.1 Coccomyxa sp. Brodo 31515 from Icmadophila ericetorum	Literature	Icmadophila ericetorum	NA	photobiont	Coccomyxa	Other
+AY293939.1	AY293939.1 Coccomyxa sp C15 from Lichenomphalia velutina	Literature	Lichenomphalia velutina	NA	photobiont	Coccomyxa	Other

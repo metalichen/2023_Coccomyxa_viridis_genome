@@ -1,0 +1,29 @@
+---
+title: "07_microscopy"
+author: "Gulnara Tagridzhanova"
+date: "01/09/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Light microscopy
+* Bright field images of:
+  * Coccomyxa viridis culture
+  * Crossections of Xanthoria thallus
+* Saved lif file as `data/microscopy/coccomyxa_brightfield.lif` and `data/microscopy/xanthoria_crossection.lif` 
+* Saved images at `data/microscopy/bright_field`
+
+## Confocal microscopy
+* With Xia, made confocal images of Coccomyxa viridis and Trebouxia isolated from Xanthoria (see `../08_isoaltion_trebouxia`)
+* Stained cultures with calcouflour white
+  * Used calcofluor white solution from SIGMA + a drop of 1M NaOH
+  * Stained for 3 min
+* Imaged on Leica SP8 with 410 nm excitation and 410-430 emission for CFW, and 650-730 for chlorophyll autofluorescence
+* Saved lif files as `data/microscopy/Coccomyxa_confocal*.lif` and `data/microscopy/Trebouxia.lif` 
+* Saved images at `data/microscopy/confocal`
+
+
+

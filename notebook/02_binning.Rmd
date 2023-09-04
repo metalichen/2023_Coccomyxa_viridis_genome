@@ -1,0 +1,70 @@
+---
+title: "02_binning"
+author: "Gulnara Tagridzhanova"
+date: "15/03/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/path/to/repo/notebook")
+```
+
+**Rationale:** I recieved the assembly from Future Genomics. Since Future Genomic reported that the algal sample contained a lot of bacterial DNA, the first step is to bin the assemblies and identify MAGs
+
+
+## Align reads against the assembly
+* Results: 94.23% overall alignment rate
+* Sorted the alignment
+* Used bowtie2 v2.4.1 and SAMtools v1.12
+```
+bowtie2-build data/FG23004_01_flye-medaka_2xpilon.fasta data/GTX0488_index
+bowtie2 -q -x data/GTX0488_index -1 /path/to/GTX0488_EKDN230002745-1A_HNHFYDSX5_L1_1.fq.gz -2 /path/to/GTX0488_EKDN230002745-1A_HNHFYDSX5_L1_2.fq.gz > analysis_and_temp_files/02_binning/GTX0488.sam
+samtools sort analysis_and_temp_files/02_binning/GTX0488.sam -o analysis_and_temp_files/02_binning/GTX0488.bam -@ 20
+rm analysis_and_temp_files/02_binning/GTX0488.sam
+samtools index  analysis_and_temp_files/02_binning/GTX0488.bam 
+```
+## Use metaBAT to produce bins
+* Used MetaBAT v2.15
+```
+cp data/FG23004_01_flye-medaka_2xpilon.fasta analysis_and_temp_files/02_binning/GTX0488.fasta
+runMetaBat.sh -t 20 analysis_and_temp_files/02_binning/GTX0488.fasta analysis_and_temp_files/02_binning/GTX0488.bam
+rm  analysis_and_temp_files/02_binning/GTX0488.fasta
+mv  GTX0488.fasta.metabat* analysis_and_temp_files/02_binning/
+```
+## Identify prokaryotic MAGs 
+* Used CheckM v1.2.0 (plus calculate coverage depth for each contig and gc%). 
+* Identified several complete bacterial genomes
+* For making summary of GC content, used bbmap-37.90
+```
+checkm coverage analysis_and_temp_files/02_binning/GTX0488.fasta.metabat* analysis_and_temp_files/02_binning/GTX0488.cov analysis_and_temp_files/02_binning/GTX0488.bam -x fa
+checkm  lineage_wf analysis_and_temp_files/02_binning/GTX0488.fasta.metabat* analysis_and_temp_files/02_binning/GTX0488_checkm -x fa --tab_table > analysis_and_temp_files/02_binning/GTX0488.checkm
+
+stats.sh in=data/FG23004_01_flye-medaka_2xpilon.fasta gc=analysis_and_temp_files/02_binning/GTX0488.gc gcformat=4
+```
+## Confirm the algal MAG with BUSCO. 
+* Used BUSCO v4.0.6
+* I decided to check only bin.9, since all contigs in this bin (and only them) were assigned to algae by Future Genomics
+* Had to make a temp folder with a copy of augustus config
+```
+mkdir analysis_and_temp_files/02_binning/GTX0488_algal_MAG_busco
+copyAugustusCfg.sh analysis_and_temp_files/02_binning/tmp_augustus/
+export AUGUSTUS_CONFIG_PATH=analysis_and_temp_files/02_binning/tmp_augustus/config
+busco -i analysis_and_temp_files/02_binning/GTX0488.fasta.metabat-bins20-20230315_164739/bin.9.fa -o GTX0488_bin9 --out_path analysis_and_temp_files/02_binning/GTX0488_algal_MAG_busco  -m  genome -l  /tsl/data/busco_lineages/chlorophyta_odb10 --offline -f -c 20
+```
+* Results are good: C:96.9%[S:96.7%,D:0.2%],F:0.6%,M:2.5%,n:1519 
+
+
+## Visualize binning result
+```{r, message = FALSE,fig.width=14,fig.height=10}
+library(tidyverse)
+gc<-read.delim2("../analysis_and_temp_files/02_binning/GTX0488.gc",header=T)
+colnames(gc)[1]<-"contig"
+gc$GC<-as.numeric(gc$GC)
+cov<-read.delim2("../analysis_and_temp_files/02_binning/GTX0488.cov")
+colnames(cov)[1]<-"contig"
+cov$Coverage<-as.numeric(cov$Coverage)
+df<-left_join(gc,cov)
+ggplot(df)+geom_point(aes(x=GC,y=Coverage,color=Bin.Id))+ coord_trans(y = "log10")
+```
+

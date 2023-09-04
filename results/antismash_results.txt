@@ -1,0 +1,7 @@
+cluster	C. viridis	C. subellipsoidea
+T1PKS	4	4
+T3PKS	8	9
+Terpene	3	5
+NRPS	3	2
+Mixed	5	1
+Total	23	21

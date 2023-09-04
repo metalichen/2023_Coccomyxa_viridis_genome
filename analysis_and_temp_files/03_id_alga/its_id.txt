@@ -1,0 +1,77 @@
+KU696488.1	Coccomyxa melkonianii strain SCCA048	non-lichen	non-lichen			
+MF465900.1	Coccomyxa antarctica isolate FACHB 2140	non-photobiont-lichen	Usnea aurantiacoatra	Trebouxia	10.3897/phytokeys.98.25360	
+MK694759.1	Coccomyxa sp Obi	non-lichen	non-lichen			
+MF465899.1	Coccomyxa greatwallensis isolate Ua5	non-photobiont-lichen	Usnea aurantiacoatra	Trebouxia	10.3897/phytokeys.110.26961	
+AY328523.1	Coccomyxa subellipsoidea strain SAG 216 13	photobiont	Lichenomphalia umbellifera	Coccomyxa	doi.org/10.1016/S1055-7903(03)00215-X	
+MK504639.1	Coccomyxa elongata strain MZ_Ch64 	non-lichen	non-lichen			
+KX809916.1	Coccomyxa silvae_gabretae culture CCALA 1095	non-lichen	non-lichen			
+KX809913.1	Coccomyxa fottii culture CCALA 428	non-lichen	non-lichen			
+MZ868176.1	Coccomyxa viridis isolate NEM_5P	non-photobiont-lichen	Hypotrachyna adducta	Trebouxia		https://pubmed.ncbi.nlm.nih.gov/35418958/
+MH753231.1	Coccomyxa solorinae isolate P245	photobiont	Peltigera leucophlebia	Coccomyxa	https://doi.org/10.3389/fmicb.2018.02770	
+AY333646.1	Coccomyxa glaronensis strain Takacova 1983 2	non-lichen	non-lichen			
+AY293968.1	Coccomyxa chodatii	non-lichen	non-lichen			
+MZ868162.1	Coccomyxa simplex isolate HP_50BP	non-photobiont-lichen	Lobaria retigera	Nostoc		
+KJ690280.1	Coccomyxa peltigerae isolate 10459_A 	photobiont	Peltigera aphthosa	Coccomyxa	https://doi.org/10.7872/crya.v36.iss1.2015.81	
+AY328524.1	Pseudococcomyxa simplex strain SAG 216_8	non-lichen	non-lichen			
+LC660445.1	Elliptochloris subsphaerica Handa_S_293_c	non-lichen	non-lichen			
+MK694758.1	Coccomyxa sp KJ	non-lichen	non-lichen			
+AY293948.1	Coccomyxa sp C14	photobiont	Lichenomphalia hudsoniana	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+AY293947.1	Coccomyxa sp C16	photobiont	Lichenomphalia hudsoniana	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+AY293946.1	Coccomyxa sp C20	photobiont	Lichenomphalia grisella	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+AY293945.1	Coccomyxa sp C19	photobiont	Lichenomphalia umbellifera	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+AY293933.1	Coccomyxa sp C18	photobiont	Lichenomphalia hudsoniana	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+AY293932.1	Coccomyxa sp C12	photobiont	Lichenomphalia umbellifera	Coccomyxa	https://doi.org/10.1016/S1055-7903(03)00215-X	
+KM020052.1	Coccomyxa sp IB_GF_12 	non-lichen	non-lichen			
+DQ660909.1	Coccomyxa sp gbA3	non-photobiont-lichen	Lecanora rupicola	Trebouxia		
+OM304844.1	Coccomyxa sp isolate CV_01	non-lichen	non-lichen			
+MN871439.1	Coccomyxa subellipsoidea voucher CUPVOUCHER_CS_2019_1 	non-lichen	non-lichen			
+MN190713.1	Coccomyxa sp NEM_1	non-lichen	non-lichen			
+KJ690288.1	Coccomyxa sp	photobiont	Peltigera aphthosa	Coccomyxa		
+OK491799.1	Coccomyxa sp ZZ_BF3_Alga	non-photobiont-lichen	Parmelia sulcata 	Trebouxia	https://doi.org/10.1186/s12934-022-01804-6	
+MZ868175.1	Coccomyxa viridis isolate NEM_1P	non-photobiont-lichen	Parmelinella wallichiana	Trebouxia		
+MW013811.1	Coccomyxa subellipsoidea clone IT3_2_3	non-lichen	non-lichen			
+MN738564.1	Coccomyxa sp myx 	non-lichen	non-lichen			
+MT066391.1	Coccomyxa viridis voucher VancurovaA574	non-photobiont-lichen	Stereocaulon alpinum	Asterochloris 		
+MK005098.1	Coccomyxa sp S3R_01	non-lichen	non-lichen			
+KY402198.1	Coccomyxa sp YN	non-photobiont-lichen	Cladonia yunnan	Trebouxia	"note: the study claims this coccomyxa is the main photobiont of the cladonia, but I'm going to put it as Trebouxia, considreing what we know about cladonia (http://xbzwxb.alljournal.net/xbzwxb/ch/reader/download_pdf.aspx?file_no=20201108&year_id=2020&quarter_id=11&falg=1) "	
+KX185526.1	Coccomyxa sp GM15A_305	photobiont	Lichenomphalia oreades	Coccomyxa		
+KX185525.1	Coccomyxa sp 15_10_25	photobiont	Lichenomphalia oreades	Coccomyxa		
+KR149246.1	Coccomyxa sp LXD	non-lichen	non-lichen			
+HQ335216.1	Coccomyxa sp S10	unknown	unknown		"the submission title mentions lichens, but I couldn't find the actual isolation source anywhere"	
+HQ335215.1	Coccomyxa sp S2	unknown	unknown		"the submission title mentions lichens, but I couldn't find the actual isolation source anywhere"	
+MW412914.1	Coccomyxa sp IITRSTKM4	non-lichen	non-lichen			
+KM020053.1	Coccomyxa sp IB_GF_3	non-lichen	non-lichen			
+KX809915.1	Coccomyxa elongata culture CCALA 427	non-lichen	non-lichen			
+MZ868164.1	Coccomyxa viridis isolate HP_65P	non-photobiont-lichen	Usnea stigmatoides	Trebouxia		
+MZ868177.1	Coccomyxa viridis isolate NEM_6P	non-photobiont-lichen	Usnea orientalis	Trebouxia		
+KJ690284.1	Coccomyxa sp CospNM2013	non-lichen	non-lichen			
+KM020051.1	Pseudococcomyxa sp SAG 2253	non-lichen	non-lichen			
+KM020050.1	Pseudococcomyxa sp SAG 2254	non-lichen	non-lichen			
+AB917140.1	Coccomyxa sp GA5a	non-lichen	non-lichen			
+FN298928.1	Coccomyxa sp CCAP 211 97	non-lichen	non-lichen			
+AJ880282.1	Coccomyxa sp SAG 2325	non-lichen	non-lichen			
+FN298927.1	Coccomyxa sp CCAP 216 24	non-lichen	non-lichen			
+contig_22_pilon_pilon	Coccomyxa viridis NJT Lab Strain	non-photobiont-lichen	Xanthoria parietina	Trebouxia		
+HG972999.1	Coccomyxa viridis strain SAG 216-1	non-photobiont-lichen	Acarospora fuscata	Trebouxia		
+HG973001.1	Coccomyxa viridis strain SAG 216-4	unknown	Peltigera aphtosa	Coccomyxa		
+HG973002.1	Coccomyxa viridis strain SAG 216-14	non-photobiont-lichen	Sphaerophorus coralloides	Dictyochloropsis or Asterochloris		
+HG973003.1	Coccomyxa viridis strain SAG 2104	unknown	unknown			
+HG973005.1	Coccomyxa viridis strain SAG 2127	non-lichen	non-lichen			
+HG973006.1	Coccomyxa viridis strain SAG 2325	non-lichen	non-lichen			
+HG972998.1	Coccomyxa dispar strain SAG 49.84	photobiont	Multiclavula vernalis	Coccomyxa		
+HE586508.1	Coccomyxa sp. KN-2011-C4 strain C4	non-lichen	non-lichen			
+HG972996.1	Coccomyxa galuniae strain SAG 2253	non-lichen	non-lichen			
+HG972994.1	Coccomyxa vinatzeri strain ASIB V16	non-lichen	non-lichen			
+FR850476.1	Coccomyxa sp. 216-25	non-lichen	non-lichen			
+HG972979.1	Coccomyxa polymorpha strain CAUP H5101	unknown	unknown			
+HE617183.1	Coccomyxa onubensis strain SAG 2510	non-lichen	non-lichen			
+FN597598.1	Coccomyxa chodatii strain SAG 216-2	non-lichen	non-lichen			
+HE586513.1	Coccomyxa sp. KN-2011-E4	photobiont	Peltigera aphthosa	Coccomyxa		
+HE586545.1	Coccomyxa sp. KN-2011-E5	photobiont	Peltigera leukophlebia	Coccomyxa		
+KT253181.1	Coccomyxa sp. 078 isolate AF10	photobiont	Micarea lignaria	Coccomyxa		
+KT253180.1	Coccomyxa sp. 092 isolate M Powell 2882 AF24	photobiont	Micarea nitschkeana	Coccomyxa		
+KT253178.1	Coccomyxa sp. 091 isolate M Powell 2890 AF23	photobiont	Micarea denigrata	Coccomyxa		
+KT253177.1	Coccomyxa sp. 090 isolate AF22	photobiont	Micarea denigrata	Coccomyxa		
+HQ287295.1	Coccomyxa sp. MW8238a clone L631	photobiont	Schizoxylon albescens	Coccomyxa		
+JN573865.1	Coccomyxa sp. Brodo 31515	photobiont	Icmadophila ericetorum	Coccomyxa		
+AY293939.1	Coccomyxa sp C15	photobiont	Lichenomphalia velutina	Coccomyxa		

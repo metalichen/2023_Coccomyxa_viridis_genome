@@ -1,0 +1,57 @@
+#Snakefile for annotating the Coccomyxa algal MAG
+
+import pandas as pd
+import re
+from os.path import join
+
+
+#load table with metadata
+input_table = pd.read_csv("../03_transcriptomic_analysis/data/metadata/bmm_coculture_thallus.csv").set_index("run_id", drop=False)
+selected_table = input_table.loc[input_table['pair'] == 'trebouxia']
+SAMPLES = selected_table.index.tolist()
+
+#define functions, by which I will get file locations for each ran from the table
+def fq1_from_sample(wildcards):
+  return input_table.loc[wildcards.sample, "fq1"]
+
+def fq2_from_sample(wildcards):
+  return input_table.loc[wildcards.sample, "fq2"]  
+
+
+
+rule all:
+    input:
+    	"analysis_and_temp_files/03_id_alga/GTX0488_algal_MAG_STAR_index/touch",
+    	expand("analysis_and_temp_files/05_annotate_coccomyxa/rna_align/{sample}Aligned.sortedByCoord.out.bam",sample=SAMPLES)
+
+
+# index the MAG
+rule index:
+    input: "analysis_and_temp_files/02_binning/GTX0488.fasta.metabat-bins20-20230315_164739/bin.9.fa"
+    output: "analysis_and_temp_files/03_id_alga/GTX0488_algal_MAG_STAR_index/touch"
+    params:
+        mem = "80G",
+        queue="tsl-short",
+        time="6:0:0"
+    threads: 20	
+    shell: "bash code/star_index.sh {input} analysis_and_temp_files/03_id_alga/GTX0488_algal_MAG_STAR_index {output} 20"    
+
+#align reads from the RNA-seq of the pure culture
+rule align:
+    input:
+        fq1=fq1_from_sample,
+        fq2=fq2_from_sample,
+        index="analysis_and_temp_files/03_id_alga/GTX0488_algal_MAG_STAR_index/touch"
+    output: "analysis_and_temp_files/05_annotate_coccomyxa/rna_align/{sample}Aligned.sortedByCoord.out.bam"
+    params:
+        mem = "80G",
+        queue="tsl-short",
+        time="3:0:0"
+    threads: 20	
+    shell: 
+        """
+        mkdir -p analysis_and_temp_files/05_annotate_coccomyxa/rna_align/;
+        code/star_align.sh {input.fq1} {input.fq2} {input.index} {threads} {wildcards.sample}.bam
+        """
+
+

@@ -1,0 +1,63 @@
+Run	Lichen.metagenomes
+SRR11456915	Peltigera aphthosa
+SRR14722299	Cladonia squamosa
+SRR11456921	Peltigera evansiana
+SRR13685159	Icmadophila ericetorum
+SRR11456917	Peltigera phyllidiosa
+SRR11456919	Solorina crocea
+SRR14722188	Xylographa vitiligo
+SRR14721952	Cladonia ochrochlora
+SRR14722112	Sticta sp. Lendemer_47364_NY-2795562
+SRR14721962	Ramalina petrina
+SRR14722045	Rinodina ascociscana
+SRR14722158	Lecanora albella
+T1867	Xylographa_vitiligo
+SRR14722039	Trapeliopsis flexuosa
+SRR14722085	Pseudosagedia rhaphidosperma
+SRR14722109	Pertusaria andersoniae
+SRR14722152	Micarea neostipitata
+SRR14722130	Parmotrema hypotropum
+SRR14722143	Zwackhia viridis
+SRR14722221	Megalospora porphyritis
+SRR14722154	Lecanora strobilina
+SRR14722172	Chrysothrix xanthina
+SRR13685149	NA
+SRR14722135	Mycocalicium subtile
+ERR4179390	Lobaria pulmonaria
+X4	Pectenia plumbea
+T1888	Puttea_exsequens
+SRR14722071	Arthonia cupressina
+T1916	Thelotrema_lepadinum
+T1889	Xylographa_carneopallida
+ERR4179389	Cladonia furcata
+GTX0158	Gomphillus americanus
+SRR14721970	Leucodecton sp. Tripp_6156_NY-2796959
+SRR14722281	Viridothelium virens
+ERR4179391	Peltigera polydactylon
+SRR14722330	Pertusaria obruta
+SRR14721971	Porina heterospora
+SRR14722125	Ionaspis alba
+SRR14722231	Lecanora masana
+SRR1531517	Dibaeis baeomyces
+T1868	Ptychographa_xylographoides
+T1894	Bachmanniomyces_S44760
+SRR14722184	Lecanora hybocarpa
+SRR14722272	Lepraria leprolomopsis
+SRR14722067	Pertusaria epixantha
+SRR13685165	Usnea cornuta
+SRR14722291	Tuckermannopsis ciliaris
+SRR14722316	Heterodermia echinata
+SRR14722042	Scoliciosporum umbrinum
+SRR14722160	Herteliana schuyleriana
+SRR13685162	Usnea subfusca
+SRR14721974	Hypotrachyna catawbiensis
+SRR14721947	Usnea mutabilis
+SRR14722232	Lecanora rugosella
+SRR14722066	Pilophorus fibula
+SRR14722229	Lecidea roseotincta
+SRR14722129	Pseudevernia cladonia
+T1904	Toensbergia_leucococca
+SRR5808932	Pseudevernia furfuracea
+GTX0161	Alectoria fallacina
+SRR14722041	Stereocaulon dactylophyllum
+SRR14722159	Ochrolechia arborea

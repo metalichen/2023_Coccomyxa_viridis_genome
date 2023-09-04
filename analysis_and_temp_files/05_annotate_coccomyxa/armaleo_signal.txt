@@ -1,0 +1,17 @@
+IPR	PFAM	Asterochloris	Chlorella_NC64A	Coccomyxa_C169
+IPR000719	protein kinase (PF00069)	201	174	157
+IPR000242	Protein-tyrosine phosphatase (PF00102)	3	0	1
+IPR001806	Ras family (PF00071)	19	12	14
+IPR000198	RhoGAP domain (PF00620)	3	1	0
+IPR003661	His Kinase A (phospho-acceptor) domain (PF00512)	6	2	3
+IPR001789	Response regulator receiver domain (PF00072)	11	7	8
+IPR001425	Bacteriorhodopsin-like protein (PF01036)	5	1	1
+IPR000595	Cyclic nucleotide-binding domain (PF00027)	21	7	11
+IPR001054	adenylate cyclase class III (PF00211)	17	5	3
+IPR023577	adenylate cyclase class IV (PF01928)	2	1	2
+IPR001019	G-protein alpha subunit (PF00503)	0	0	0
+IPR015898	G-gamma (PF00631)	0	0	0
+IPR000340	"Dual specificity phosphatase, catalytic domain (PF00782)"	15	13	14
+IPR001932	Protein phosphatase 2C (PF00481)	21	26	20
+IPR000219	RhoGEF (PF00621)	0	0	0
+IPR016137	RGS (PF00615)	0	0	0

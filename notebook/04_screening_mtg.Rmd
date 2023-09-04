@@ -1,0 +1,207 @@
+---
+title: "04_screening_mtg"
+author: "Gulnara Tagridzhanova"
+date: "10/05/2023"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "/path/to/repo/notebook")
+knitr::knit_hooks$set(inline = function(x) {
+  x <- sprintf("%1.0f", x)
+  paste(x, collapse = ", ")})
+```
+
+**Summary:** To determine how widespread Coccomyxa viridis is in lichens, I screened metagenomic assemblies produced as a part of my recent lichen metagenomics project
+
+
+
+## 1. Screening
+* Screened 438 metagenomic assemblies from the lichen metagenomics project. 
+  * Accidentally included SRR13685149 Mycocalicium metagenome
+* Used ITS from GT0481 as a query. The evalue threshold is based on the results on my search of the Xanthoria metagenomes, where the Trebouxia ITS was returned as a hit with the evalue of 1e-64. Deleted all empty files
+```
+for file in ../path/to/*_scaffolds.fasta; do sample="$(ls $file | cut -d/ -f4)"; blastn -query cviridis_its.fa -subject $file  -outfmt 6 -evalue 1e-65 -out cviridis_blast/$sample.blast; done
+find cviridis_blast/ -size 0 -print -delete
+```
+* In total, 66 metagenomes had 84 hits
+  * For example, Cladonia furcata (ERR4179389) has a low-coverage contig (1X coverage), nearly identical to the Coccomyxa from GT0481 (99% identical)
+  * Alectoria fallacina (GTX0161) has a contig that blasts as Cocoomyxa antarctica (on my tree, nested within C. viridis). Its coverage is 44X, compared to 1661X of the Trebouxia ITS
+* Extracted the sequences, added the name of the metagenome to the fasta headers, and concatenated into one file
+```
+for file in cviridis_blast/*.blast; do assembly="$(basename $file ".blast")";  bash extract_blast.sh $file ../05_MAGs/assemblies_paul/$assembly > cviridis_blast/"$assembly"_coccomyxa.fa; done 
+
+for file in cviridis_blast/*_scaffolds.fasta_coccomyxa.fa; do assembly="$(basename $file "_scaffolds.fasta_coccomyxa.fa")"; awk -v var1="$assembly"_ '/>/{{sub(">","&" var1 )}}1' $file > cviridis_blast/"$assembly"_coccomyxa_renamed.fa; done
+
+cat  cviridis_blast/*_coccomyxa_renamed.fa > cviridis_blast/cviridis_metagenomes.fa
+```
+* Manually removed one hit, since it was too short and didn't cover any portion of the ITS, only a flanking region
+
+## 2. Phylogenetic tree
+#### Constructed phylogeny
+* Made a big phylogeny of Coccomyxa
+* Included reference sequences from NCBI, the same as used in the tree in `../03_id_alga`
+* Added the sequences I extracted from metagenomes
+* Aligned and trimmed as described in `../03_id_alga`. COnstructed the tree with IQTree v2.2.2.2
+```
+cat analysis_and_temp_files/03_id_alga/genbank_its.fasta analysis_and_temp_files/03_id_alga/GTX0488_its.fa analysis_and_temp_files/03_id_alga/cviridis_metagenomes.fa > analysis_and_temp_files/03_id_alga/combined_its_add_metagenomes.fa
+mafft --maxiterate 1000 --genafpair analysis_and_temp_files/03_id_alga/combined_its_add_metagenomes.fa > analysis_and_temp_files/03_id_alga/combined_its_aligned_add_metagenomes.fa
+trimal -in analysis_and_temp_files/03_id_alga/combined_its_aligned_add_metagenomes.fa -out analysis_and_temp_files/03_id_alga/combined_its_aligned_add_metagenomes.phyl -gt 0.1 -phylip -keepheader
+
+bash code/iqtree.sh analysis_and_temp_files/03_id_alga/combined_its_aligned_add_metagenomes.phyl 20
+```
+
+#### Annotated metagenome-derived sequences
+* Retrieved the info on the metagenomes where I found Coccomyxa.
+  * Used the spreadsheet from my metagenomic study to connect metagenome ID to lichen species
+* Saved the list of metagenomes as `analysis_and_temp_files/03_id_alga/list_metagenomes_with_coccomyxa.txt`
+```{r, message = FALSE,fig.width=14,fig.height=14}
+mtg_info<-read.delim2("../analysis_and_temp_files/04_screening_mtg/all_metagenome_reanalysis.txt")
+#read the tree and use it to extract the ID of the metagenome that have Coccomyxa
+library(ape)
+library(tidyverse)
+tree3<-read.tree("../analysis_and_temp_files/04_screening_mtg/combined_its_aligned_add_metagenomes.phyl.contree")
+mtg_names<-data.frame("sequence"=tree3$tip.label) %>% filter(grepl("NODE",sequence))
+mtg_names$metagenome<-sub("_.*", "", mtg_names$sequence)
+
+#combine with the metatable on the metagenomes and save the resulting table
+cocc_mtg<-data.frame("Run"=mtg_names$metagenome %>% unique) %>% left_join(mtg_info) %>% select(Run,Lichen.metagenomes)
+
+write.table(cocc_mtg,"../analysis_and_temp_files/04_screening_mtg/list_metagenomes_with_coccomyxa.txt",sep="\t",quote = F, row.names = F, col.names=T)
+```
+* Manually, added to the table a column with the role of Coccomyxa (photobiont / epiphyte)
+  * Used the same logic as in `03_id_alga`
+  * For the lichens, where Coccomyxa is listed as the primary photobiont, I assumed that we sequence that I have are from the photobiont
+  * For the rest, I put the "epiphyte" label
+  * Saved as `analysis_and_temp_files/03_id_alga/list_metagenomes_with_coccomyxa2.txt`
+* Combined tables for the sequences from the literature (see `03_id_alga`) and from the metagenome
+
+```{r, message = FALSE,fig.width=14,fig.height=14}
+mtg<-read.delim2("../analysis_and_temp_files/04_screening_mtg/list_metagenomes_with_coccomyxa2.txt")
+mtg2<-mtg_names %>% left_join(mtg,by=c("metagenome"="Run"))
+mtg2$name<-paste0("Coccomyxa from ",mtg2$Lichen.metagenomes," metagenome")
+mtg2$source<-"Lichen metagenome"
+
+lit<-read.delim2("../analysis_and_temp_files/03_id_alga/its_id.txt",header=F)
+colnames(lit)<-c("sequence","name","Coccomyxa_role","Lichen.metagenomes","Photobiont","note","link")
+lit<-lit %>% mutate(source= ifelse(grepl("contig",sequence),"Strain from this paper","Literature"))
+lit$metagenome<-NA
+
+seq_info<-rbind(mtg2,lit %>% select(-note,-link))
+
+```
+
+#### Visualized
+```{r, message = FALSE,fig.width=20,fig.height=10}
+library(ape)
+library(ggtree)
+tree3<-read.tree("../analysis_and_temp_files/04_screening_mtg/combined_its_aligned_add_metagenomes.phyl.contree")
+tree3 <- root(tree3, outgroup = "LC660445.1", resolve.root = TRUE)
+tree3 <- as.polytomy(tree3, feature='node.label', fun=function(x) as.numeric(x) < 70)
+
+##rename
+seq_info<-seq_info %>% mutate(new=ifelse(Coccomyxa_role %in% c("epiphyte","photobiont"),
+                          paste(sequence,name,"from",Lichen.metagenomes),
+                          paste(sequence,name)))
+
+tree3$tip.label<-seq_info[[8]][match(tree3$tip.label, seq_info[[1]])]
+
+#make a vector for color
+df<-data.frame("new"=tree3$tip.label) %>% left_join(seq_info) %>% 
+  mutate(labels=ifelse(grepl("contig",new),"strain from this paper",
+                      ifelse(source=="Lichen metagenome","sequence from lichen metagenome",
+                             ifelse(grepl("viridis",name),"Coccomyxa viridis","other"))))
+
+p <- ggtree(tree3,ladderize = TRUE,right = T,linewidth=0.2) %<+% df +
+   geom_hilight(node=165, fill="steelblue", alpha=.2,type="roundrect",extend=0.3) + geom_tippoint(aes(col=labels),size=1)+
+  scale_color_manual(values=c("strain from this paper" = "red","Coccomyxa viridis"= "#0072b2", "sequence from lichen metagenome" = "#cc79a7","other"="black"))
+p + xlim(0, 0.5)
+ggsave("../results/metagenomic_screening_tree.svg",device="svg",width=6,height=3)
+```
+
+* Most metagenome-derived sequences were recovered in the C. viridis clade (highlighted in blue)
+
+#### Extracted info on lichens that have C. viridis clade
+```{r, message = FALSE,fig.width=20,fig.height=30}
+library(phangorn)
+leaves_id<-Descendants(tree3,165,"tips")
+leaves<-tree3$tip.label[leaves_id[[1]]]
+
+cviridis_lichens<-data.frame("new"=leaves) %>% left_join(seq_info) %>% filter(Coccomyxa_role != "non-lichen", Lichen.metagenomes != "unknown") %>% select(sequence,new,source,Lichen.metagenomes,metagenome,Coccomyxa_role, Photobiont)
+colnames(cviridis_lichens)<-c("Sequence_ID","Name","Sequence_source","Lichen_species","Source_metagenome","Role","Primary_photobiont_of_the_lichen")
+write.table(cviridis_lichens,"../results/lichens_with_cviridis.txt",sep="\t",quote = F, row.names = F, col.names=T)
+```
+* The majority of (`r (nrow(cviridis_lichens %>% filter(Role=="epiphyte",Sequence_source=="Lichen metagenome")) * 100)/nrow(cviridis_lichens %>% filter(Sequence_source=="Lichen metagenome"))`%) of metagenome-derived sequences in this clade identified as epiphytic and originate in lichens with different primary photobions (Trebouxia, Trentepohlia, Nostoc, etc)
+* Conversely, the majority of lichen-derived Coccomyxa sequences (`r (seq_info %>% filter(sequence %in% cviridis_lichens$Sequence_ID,source=="Lichen metagenome") %>% nrow()) * 100 / (seq_info %>% filter(source=="Lichen metagenome") %>% nrow())`%) fell into the C. viridis clade
+* Also identified several (`r nrow(cviridis_lichens %>% filter(Role=="photobiont",Sequence_source=="Lichen metagenome",Source_metagenome!="SRR11456919"))`) putative photobionts. 
+  * In this number I didn't include two sequences from the SRR11456919 metagenome (Solorona crocea). The primary photobiont of Solorina is Coccomyxa, but I suspect these two sequences are linked to it. SRR11456919 metagenome contained three Coccomyxa sequences: one more abundant (coverage depth = 239X) and closely related to C. solorinae, and two with low abundance (coverage depth of 1X) and recovered in the C. viridis clade. Given this, I labeled the high abundant sequence as coming from the photobiont, and low abundant ones as epiphytic
+  * Putative photobionts are coming from Micarea neostipitata and Dibaeis baeomyces
+
+#### Prepared similar list of non-C.viridis sequences
+```{r, message = FALSE}
+leaves_id_sim<-Descendants(tree3,172,"tips")
+leaves_sim<-tree3$tip.label[leaves_id_sim[[1]]]
+csim_lichens<-data.frame("new"=leaves_sim) %>% left_join(seq_info) %>% filter(Coccomyxa_role != "non-lichen", Lichen.metagenomes != "unknown") %>% select(sequence,new,source,Lichen.metagenomes,metagenome,Coccomyxa_role, Photobiont)
+colnames(csim_lichens)<-c("Sequence_ID","Name","Sequence_source","Lichen_species","Source_metagenome","Role","Primary_photobiont_of_the_lichen")
+csim_lichens$clade<-"C. simplex/C. solorinae clade"
+
+leaves_id_sub<-Descendants(tree3,190,"tips")
+leaves_sub<-tree3$tip.label[leaves_id_sub[[1]]]
+csub_lichens<-data.frame("new"=leaves_sub) %>% left_join(seq_info) %>% filter(Coccomyxa_role != "non-lichen", Lichen.metagenomes != "unknown") %>% select(sequence,new,source,Lichen.metagenomes,metagenome,Coccomyxa_role, Photobiont)
+colnames(csub_lichens)<-c("Sequence_ID","Name","Sequence_source","Lichen_species","Source_metagenome","Role","Primary_photobiont_of_the_lichen")
+csub_lichens$clade<-"C. subellipsoidea clade"
+
+rest_lichens<-seq_info %>% filter(!(sequence %in% c(cviridis_lichens$Sequence_ID, 
+                                                  csub_lichens$Sequence_ID,
+                                                  csim_lichens$Sequence_ID))) %>% 
+  filter(Coccomyxa_role != "non-lichen", Lichen.metagenomes != "unknown") %>% select(sequence,new,source,Lichen.metagenomes,metagenome,Coccomyxa_role, Photobiont)
+
+colnames(rest_lichens)<-c("Sequence_ID","Name","Sequence_source","Lichen_species","Source_metagenome","Role","Primary_photobiont_of_the_lichen")
+rest_lichens$clade<-"Other"
+
+
+write.table(rbind(csub_lichens,csim_lichens,rest_lichens),"../results/lichens_with_other_cocc.txt",sep="\t",quote = F, row.names = F, col.names=T)
+
+```
+  
+#### Mapped the metagenomes in which Coccomyxa viridis was detected
+```{r, message = FALSE,fig.width=20,fig.height=30}
+library(ggmap)
+library(sf)
+library("rnaturalearth")
+library("rnaturalearthdata")
+
+locations<-read.delim("../analysis_and_temp_files/04_screening_mtg/locations_metagenomes.txt")
+locations_selected<-locations %>% right_join(cviridis_lichens,by=c("run_accession"="Source_metagenome")) %>% select(run_accession,lat,long) %>% distinct()
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+ggplot(data = world) +
+  geom_sf(fill= "antiquewhite",color="lightgrey",size=0.2)+
+  coord_sf(expand = FALSE)+
+  geom_point(data = locations_selected, aes(x = as.numeric(long), y = as.numeric(lat)), color = "brown", size = 1,alpha=.3)+ 
+  theme_minimal()+
+ theme(axis.title.x=element_blank(),
+       axis.title.y=element_blank(),
+       axis.text.x = element_blank(),
+       panel.background = element_rect(fill = "aliceblue"))
+ggsave("../results/map.pdf",width=4,height=3)
+```
+
+
+#### Plotted the percent of metagenomes in which C. viridis was detected
+```{r, message = FALSE,fig.width=20,fig.height=30}
+###count metagenomes per order (or per class, for non-lecanoromycetes)
+mtg_per_order<-mtg_info %>% mutate(order2 = ifelse(class=="Lecanoromycetes",order,class)) %>% group_by(order2) %>% summarise(order_screened=n()) 
+
+###count C.viridis-containing metagenomes
+cvir_mtg_per_order<-cocc_mtg %>% filter(Run %in% cviridis_lichens$Source_metagenome) %>% left_join(mtg_info) %>%
+  mutate(order2 = ifelse(class=="Lecanoromycetes",order,class)) %>%
+  group_by(order2) %>% summarise(order_cvir=n()) 
+
+###combine and visualize
+df<-mtg_per_order %>% left_join(cvir_mtg_per_order) %>% mutate_if(is.numeric,coalesce,0) %>%
+  mutate(cvir_pres=order_cvir/order_screened,cvir_abs=1-order_cvir/order_screened) 
+df  
+```
+
